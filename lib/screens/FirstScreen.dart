@@ -12,16 +12,6 @@ class MyPage extends StatelessWidget {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
-          
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.deepPurpleAccent,
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => AddTaskScreen()),
-                );
-              },
-              child: Icon(Icons.add),
-            ),
               drawer: Drawer(),
             appBar: AppBar(
               backgroundColor: Colors.deepPurpleAccent,
@@ -40,6 +30,15 @@ class MyPage extends StatelessWidget {
                 ],
                 isScrollable: true,
               ),
+            ),
+              floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.deepPurpleAccent,
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => AddTaskScreen()),
+                );
+              },
+              child: Icon(Icons.add),
             ),
             body: TabBarView(
               children: [AllTasksScreen(), CompleteTasksScreen(), InCompleteTasksScreen()],
