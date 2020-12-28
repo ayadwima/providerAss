@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sql_ass/DataBase/DataBaseHelper.dart';
+import 'package:sql_ass/DataBase/DBHelper.dart';
 import 'package:sql_ass/screens/AllTasksScreen.dart';
 import 'package:sql_ass/screens/CompleteTasksScreen.dart';
 import 'package:sql_ass/screens/InCompleteTasksScreen.dart';
@@ -12,17 +12,17 @@ class MyPage extends StatelessWidget {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
-            drawer: Drawer(),
+          
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.deepPurpleAccent,
               onPressed: () {
-                showModalBottomSheet(
-                 context: context,
-                   builder: (context) => ModalSheet(),
-              elevation: 8.0);
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => AddTaskScreen()),
+                );
               },
               child: Icon(Icons.add),
             ),
+              drawer: Drawer(),
             appBar: AppBar(
               backgroundColor: Colors.deepPurpleAccent,
               title: Text('My App'),

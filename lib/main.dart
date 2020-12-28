@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(ChangeNotifierProvider(
     create: (BuildContext context) {
-      return appProvider();
+      return AppProvider();
     },
     child: MaterialApp(
       debugShowCheckedModeBanner: false,

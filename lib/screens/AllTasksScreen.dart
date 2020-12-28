@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sql_ass/DataBase/DataBaseHelper.dart';
+import 'package:sql_ass/DataBase/DBHelper.dart';
 import 'package:sql_ass/model/Task.dart';
 import 'package:sql_ass/app_provider.dart';
 import 'FirstScreen.dart';
@@ -10,11 +10,11 @@ class AllTasksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var db = DBHelper();
     db.getAllTasks().then((value) {
-      Provider.of<appProvider>(context, listen: false).setTasks(value);
+      Provider.of<AppProvider>(context, listen: false).setTasks(value);
     });
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Consumer<appProvider>(
+        body: Consumer<AppProvider>(
           builder: (context, value, child) {
             return ListView.builder(
               itemCount: value.tasks.length,
@@ -31,29 +31,28 @@ class AllTasksScreen extends StatelessWidget {
                     child: ListTile(
                       leading: GestureDetector(
                         onTap: () {
-                          Widget cancelButton = FlatButton(
-                            child: Text("Cancel"),
+                          Widget cancelBtn = FlatButton(
+                            child: Text("NO"),
                             onPressed: () {
                               Navigator.pop(context);
                             },
                           );
-                          Widget continueButton = FlatButton(
+                          Widget continueBtn = FlatButton(
                             child: Text("Yes"),
                             onPressed: () {
                               db.deleteTask(value.tasks[position].id);
-                              Navigator.of(context).pushAndRemoveUntil(
+                              Navigator.of(context).push(
                                   MaterialPageRoute(
-                                      builder: (context) => MyPage()),
-                                      (Route<dynamic> route) => false);
+                                      builder: (context) => MyPage()));
                             },
                           );
 
                           AlertDialog alert = AlertDialog(
-                            title: Text("Delete Task?"),
-                            content: Text("Are you want to delete this Task?"),
+                            title: Text("Delete Task"),
+                            content: Text("Do you want to delete this Task ?"),
                             actions: [
-                              cancelButton,
-                              continueButton,
+                              cancelBtn,
+                              continueBtn,
                             ],
                           );
 
@@ -80,7 +79,7 @@ class AllTasksScreen extends StatelessWidget {
                               isComplete: value1,
                             ));
                             db.getAllTasks().then((value) {
-                              Provider.of<appProvider>(context, listen: false)
+                              Provider.of<AppProvider>(context, listen: false)
                                   .setTasks(value);
                             });
                           }),

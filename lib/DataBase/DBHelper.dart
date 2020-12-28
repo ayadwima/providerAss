@@ -55,9 +55,9 @@ class DBHelper {
   Future<List<UserTask>> getTaskType(int isComplete) async {
     try {
       database = await initDataBase();
-      List<Map> myMaps = await database.query(tableName,
+      List<Map> maps = await database.query(tableName,
           where: '$columnIsComplete=?', whereArgs: [isComplete]);
-      List<UserTask> tasks = myMaps.map((e) => UserTask.fromJson(e)).toList();
+      List<UserTask> tasks = maps.map((e) => UserTask.fromJson(e)).toList();
       return tasks;
     } catch (e) {
       print(e);

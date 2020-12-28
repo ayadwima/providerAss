@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sql_ass/DataBase/DataBaseHelper.dart';
+import 'package:sql_ass/DataBase/DBHelper.dart';
 import 'package:sql_ass/model/Task.dart';
 import 'package:sql_ass/app_provider.dart';
 
@@ -16,11 +16,11 @@ class _InCompleteTasksScreenState extends State<InCompleteTasksScreen> {
   Widget build(BuildContext context) {
     var db = DBHelper();
     db.getTaskType(0).then((value) {
-      Provider.of<appProvider>(context, listen: false).setTasks(value);
+      Provider.of<AppProvider>(context, listen: false).setTasks(value);
     });
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Consumer<appProvider>(
+        body: Consumer<AppProvider>(
           builder: (context, value, child) {
             return ListView.builder(
               itemCount: value.tasks.length,
@@ -86,7 +86,7 @@ class _InCompleteTasksScreenState extends State<InCompleteTasksScreen> {
                               isComplete: value1,
                             ));
                             db.getTaskType(0).then((value) {
-                              Provider.of<appProvider>(context, listen: false)
+                              Provider.of<AppProvider>(context, listen: false)
                                   .setTasks(value);
                             });
                           }),
